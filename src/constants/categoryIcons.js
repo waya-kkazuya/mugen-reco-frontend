@@ -1,0 +1,40 @@
+import {
+  Film,
+  Tv,
+  BookOpen,
+  Library,
+  Gamepad2,
+  Music,
+  Smartphone,
+  Utensils,
+  CakeSlice,
+  Coffee,
+  Luggage,
+  Home,
+  HeartPulse,
+  Sparkles,
+  ShoppingBag,
+  Wine,
+  HelpCircle,
+} from 'lucide-react';
+
+export const categoryIconMap = {
+  movie: Film,
+  anime: Tv,
+  manga: BookOpen,
+  book: Library,
+  game: Gamepad2,
+  music: Music,
+  app: Smartphone,
+  food: Utensils,
+  sweets: CakeSlice,
+  cafe: Coffee,
+  travel: Luggage,
+  life: Home,
+  health: HeartPulse,
+  beauty: Sparkles,
+  recommend: ShoppingBag,
+  alcohol: Wine,
+};
+
+export const defaultCategoryIcon = HelpCircle;
