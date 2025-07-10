@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import axios from 'axios';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useAppSelector } from './app/hooks';
+import { selectCsrfState } from './slices/appSlice';
+import { useAppDispatch } from './app/hooks';
+import AppRoutes from './routes/AppRoutes';
+import { fetchAuthUser } from './slices/appSlice';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useAppDispatch();
+  const csrf = useAppSelector(selectCsrfState);
+
+  // csrftokenの取得
+  useEffect(() => {
+    const getCsrfToken = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/csrftoken`);
+        axios.defaults.headers.common['X-CSRF-Token'] = res.data.csrf_token;
+        console.log(res.data.csrf_token);
+      } catch (error) {
+        console.error('Failed to fetch CSRF token:', error);
+      }
+    };
+
+    getCsrfToken();
+  }, [csrf, dispatch]);
+
+  // 認証状態管理はAuthProviderに分離
+  // 更新は初回レンダリングと同義
+  useEffect(() => {
+    dispatch(fetchAuthUser());
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
