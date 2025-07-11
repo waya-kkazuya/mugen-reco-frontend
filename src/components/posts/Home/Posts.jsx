@@ -1,5 +1,5 @@
-import Card from './Card';
-import { useQueryPosts } from '../hooks/posts/useQueryPosts';
+import Card from '../../common/Card';
+import { useQueryPosts } from '../../../hooks/posts/useQueryPosts';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Masonry from 'react-masonry-css';

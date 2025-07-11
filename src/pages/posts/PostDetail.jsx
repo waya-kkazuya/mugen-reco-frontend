@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import PostContent from '../../components/PostDetail/PostContent';
-import CommentForm from '../../components/PostDetail/CommentForm';
-import CommentList from '../../components/PostDetail/CommentList';
+import PostContent from '../../components/posts/PostDetail/PostContent';
+import CommentForm from '../../components/posts/PostDetail/CommentForm';
+import CommentList from '../../components/posts/PostDetail/CommentList';
 import { useQuerySinglePost } from '../../hooks/posts/useQuerySinglePost';
 import NotFoundPage from '../../pages/NotFoundPage';
 import { useAppSelector } from '../../app/hooks';

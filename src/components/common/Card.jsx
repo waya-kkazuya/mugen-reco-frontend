@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { categoryIconMap, defaultCategoryIcon } from '../constants/categoryIcons';
+import { categoryIconMap, defaultCategoryIcon } from '../../constants/categoryIcons';
 import { Crown, Medal, Award } from 'lucide-react';
-import { useProcessLike } from '../hooks/like/useProcessLike';
+import { useProcessLike } from '../../hooks/like/useProcessLike';
 import { LikeButton } from './LikeButton';
 
 export default function Card({ post, selectedCategory }) {
