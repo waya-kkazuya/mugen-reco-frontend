@@ -16,7 +16,6 @@ export const useMutateComment = (postId) => {
           withCredentials: true,
         }
       );
-      console.log(response.data);
       return formatSingleCommentData(response);
     },
     onSuccess: (res) => {

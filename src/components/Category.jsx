@@ -2,7 +2,6 @@ import { useQueryCategories } from '../hooks/category/useQueryCategories';
 
 export default function Category({ selectedCategory, setSelectedCategory }) {
   const { data: categories, isLoading } = useQueryCategories();
-  // console.log(categories);
 
   if (isLoading || !categories)
     return (

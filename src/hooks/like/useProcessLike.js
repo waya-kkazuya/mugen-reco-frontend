@@ -11,19 +11,18 @@ export const useProcessLike = (postId, selectedCategory) => {
   const handleLikeToggle = async (retryCount = 0) => {
     toggleLikeMutation.mutateAsync().catch((err) => {
       if (err.response?.data?.detail === 'The CSRF token has expired.' && retryCount === 0) {
-        console.log('CSRF token expired, retrying frist time...');
         return new Promise((resolve) => setTimeout(resolve, 500)).then(() =>
           handleLikeToggle(retryCount + 1)
         );
       }
 
       if (err.response.data.detail === 'The JWT has expired') {
-        console.log('The JWT has expired');
+        // console.log('The JWT has expired');
         dispatch(logoutUser);
         navigate('/login');
       }
 
-      console.error('いいね処理でエラーが発生しました:', err);
+      // console.error('いいね処理でエラーが発生しました:', err);
     });
   };
 

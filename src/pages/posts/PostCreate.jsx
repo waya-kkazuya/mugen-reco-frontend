@@ -7,7 +7,6 @@ import { validatePostForm } from '../../utils/validation';
 export default function PostCreate() {
   const { data: categories, isLoading } = useQueryCategories();
 
-  console.log(categories); //Memo化すべきか
   const { handlePostCreateSubmit } = useProcessPost();
 
   const [formData, setFormData] = useState({

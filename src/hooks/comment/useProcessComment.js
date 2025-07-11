@@ -9,11 +9,10 @@ export const useProcessComment = (postId) => {
         comment: formData.comment.trim(),
       })
       .then(() => {
-        console.log('Comment created successfully');
+        // console.log('Comment created successfully');
       })
       .catch((err) => {
         if (err.response?.data?.detail === 'The CSRF token has expired.' && retryCount === 0) {
-          console.log('CSRF token expired, retrying first time...');
           return new Promise((resolve) => setTimeout(resolve, 500)).then(() =>
             handleCommentCreateSubmit(formData, retryCount + 1)
           );

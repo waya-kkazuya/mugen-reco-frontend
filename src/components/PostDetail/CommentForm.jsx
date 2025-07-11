@@ -39,8 +39,6 @@ export default function CommentForm({ postId }) {
     e.preventDefault();
     setSubmitError('');
     setIsSubmitting(true);
-    console.log(formData);
-    console.log(formData.comment);
     // バリデーション実行
     const validation = validateCommentForm(formData);
 

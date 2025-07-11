@@ -8,7 +8,6 @@ export const useQuerySinglePost = (postId) => {
     const { data } = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/posts/${postId}`, {
       withCredentials: true,
     });
-    console.log(data);
     return formatSinglePostData(data);
   };
   return useQuery({
