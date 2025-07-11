@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/posts/Home';
 import PostCreate from '../pages/posts/PostCreate';
 import PostDetail from '../pages/posts/PostDetail';
@@ -13,6 +13,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route
           path="/posts/new"
