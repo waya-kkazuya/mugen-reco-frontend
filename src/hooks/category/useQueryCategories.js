@@ -11,7 +11,6 @@ export const useQueryCategories = () => {
   return useQuery({
     queryKey: 'categories',
     queryFn: getCategories,
-    // staleTime: 1000 * 30 // 30秒（または 60秒程度）
     staleTime: Infinity, // 再フェッチのタイミングを後で調整、CategoryなのでInfinity
   });
 };

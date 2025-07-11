@@ -17,7 +17,6 @@ function App() {
       try {
         const res = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/csrftoken`);
         axios.defaults.headers.common['X-CSRF-Token'] = res.data.csrf_token;
-        console.log(res.data.csrf_token);
       } catch (error) {
         console.error('Failed to fetch CSRF token:', error);
       }
@@ -26,7 +25,6 @@ function App() {
     getCsrfToken();
   }, [csrf, dispatch]);
 
-  // 認証状態管理はAuthProviderに分離
   // 更新は初回レンダリングと同義
   useEffect(() => {
     dispatch(fetchAuthUser());

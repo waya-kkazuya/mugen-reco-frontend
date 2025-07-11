@@ -26,7 +26,6 @@ export const useProcessPost = (postId) => {
       })
       .catch((err) => {
         if (err.response?.data?.detail === 'The CSRF token has expired.' && retryCount === 0) {
-          console.log('CSRF token expired, retrying frist time...');
           return new Promise((resolve) => setTimeout(resolve, 500)).then(() =>
             handlePostCreateSubmit(formData, retryCount + 1)
           );
@@ -51,7 +50,6 @@ export const useProcessPost = (postId) => {
       })
       .catch((err) => {
         if (err.response?.data?.detail === 'The CSRF token has expired.' && retryCount === 0) {
-          console.log('CSRF token expired, retrying frist time...');
           return new Promise((resolve) => setTimeout(resolve, 500)).then(() =>
             handlePostUpdateSubmit(formData, retryCount + 1)
           );

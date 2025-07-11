@@ -34,31 +34,29 @@ export default function Register() {
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ✅ UI層の責務: デバウンス処理（ユーザー入力制御）
-  // usernameCheckState
-  // 無限ループの可能性
+  // UI層の責務: デバウンス処理（ユーザー入力制御）
+  // ※無限ループの可能性に注意
   const debouncedUsernameCheck = useMemo(() => {
     return debounce(async (username) => {
-      console.log('Usernameのdebounce処理');
       if (!username || username.length < 3) {
-        // ✅ APIチェック結果をクリア
+        // APIチェック結果をクリア
         setUsernameCheckState((prev) => ({
           ...prev,
           isChecking: false,
           isAvailable: null,
-          checkMessage: '', // ← これでメッセージが表示されなくなる
+          checkMessage: '', // これでメッセージが表示されなくなる
         }));
         return;
       }
 
-      // ✅ フロントエンドエラーがある場合もAPIチェックをスキップ
+      // フロントエンドエラーがある場合もAPIチェックをスキップ
       const frontendErrors = validateUsername(username);
       if (frontendErrors.errors.length > 0) {
         setUsernameCheckState((prev) => ({
           ...prev,
           isChecking: false,
           isAvailable: null,
-          checkMessage: '', // ← ここでもクリア
+          checkMessage: '',
         }));
         return;
       }
@@ -72,13 +70,13 @@ export default function Register() {
       try {
         // useProcessAuthの関数を呼び出し
         const response = await checkUsernameAvailability(username);
-        console.log('response.data', response);
+        // console.log('response.data', response);
 
         if (response) {
           const isAvailable = response.isAvailable ?? null;
-          console.log('isAvailable', isAvailable);
+          // console.log('isAvailable', isAvailable);
           const message = response.message || 'チェック完了';
-          console.log('message', message);
+          // console.log('message', message);
 
           setUsernameCheckState((prev) => ({
             ...prev,
@@ -87,7 +85,7 @@ export default function Register() {
             checkMessage: message,
           }));
         } else {
-          console.error('result is undefined or null');
+          // console.error('result is undefined or null');
           setUsernameCheckState((prev) => ({
             ...prev,
             isChecking: false,
@@ -183,7 +181,6 @@ export default function Register() {
 
   // 登録ボタンを押した時の処理
   const handleSubmit = async (e) => {
-    console.log('handleSubmit押された');
     e.preventDefault();
     setSubmitError(''); //入力し始めたら空にする
     setIsSubmitting(true);
@@ -216,9 +213,9 @@ export default function Register() {
       await handleRegisterSubmit(formData);
       // 成功時の処理は各 mutation の onSuccess で実行される
     } catch (error) {
-      console.error('Registration error:', error);
+      // console.error('Registration error:', error);
 
-      // ✅ 最小限のエラーハンドリング
+      // 最小限のエラーハンドリング
       if (error.type === 'USERNAME_UNAVAILABLE') {
         setSubmitError('このユーザー名は既に使用されています');
       } else if (error.response?.data?.detail === 'The CSRF token has expired.') {

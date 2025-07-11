@@ -16,14 +16,10 @@ export const useMutateAuth = () => {
       );
     },
     onSuccess: (res) => {
-      console.log(res.data);
-      console.log(`usernameチェック、res.data.available: ${res.data.is_available}`);
-      console.log(`usernameチェック、res.data.message: ${res.data.message}`);
+      // console.log(`usernameチェック、res.data.available: ${res.data.is_available}`);
+      // console.log(`usernameチェック、res.data.message: ${res.data.message}`);
     },
     // onError部分を削除することでエラーを外側に伝播させる
-    // onError: (err) => {
-    //   alert(`${err.response.data.detail}\n${err.message}`);
-    // },
   });
 
   const loginMutation = useMutation({
@@ -33,12 +29,9 @@ export const useMutateAuth = () => {
       });
     },
     onSuccess: (res) => {
-      console.log(`ログイン成功、res.data.username: ${res.data.username}`);
-      dispatch(setLoggedInUser(res.data.username)); // Reduxにログインユーザー情報を保存
+      dispatch(setLoggedInUser(res.data.username));
       // ProtectedRoute から渡された state を取得
-      const from = location.state?.from || '/home';
-      console.log(from); // '/profile?tab=liked-posts'
-
+      const from = location.state?.from || '/home'; // 例'/profile?tab=liked-posts'
       navigate(from, { replace: true });
     },
     onError: (err) => {
@@ -57,7 +50,6 @@ export const useMutateAuth = () => {
       });
     },
     onError: (err) => {
-      // alert(`${err.response.data.detail}\n${err.message}`);
       if (err.response.data.detail === 'The CSRF token has expired.') {
         dispatch(toggleCsrfState());
       }
@@ -81,7 +73,6 @@ export const useMutateAuth = () => {
       navigate('/home');
     },
     onError: (err) => {
-      alert(`${err.response.data.detail}\n${err.message}`);
       // #ログアウトでもCSRFtokenが必要
       if (err.response.data.detail === 'The CSRF token has expired') {
         dispatch(toggleCsrfState());

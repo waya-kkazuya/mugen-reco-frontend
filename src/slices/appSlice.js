@@ -23,7 +23,6 @@ export const fetchAuthUser = createAsyncThunk('auth/fetchAuthUser', async () => 
   const res = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/user`, {
     withCredentials: true, // ← Cookieを送信
   });
-  console.log(res.data);
   return res.data;
 });
 export const appSlice = createSlice({
@@ -31,13 +30,10 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     toggleCsrfState: (state) => {
-      console.log(state.csrfTokenExp);
       state.csrfTokenExp = !state.csrfTokenExp;
-      console.log(state.csrfTokenExp);
     },
     // ログイン成功時
     setLoggedInUser: (state, action) => {
-      // console.log(action.payload);
       state.isAuthenticated = true;
       state.user = action.payload; // payload にユーザーデータが渡される想定
     },
@@ -58,7 +54,6 @@ export const appSlice = createSlice({
         // console.log('fulfilled'); // 通信に成功していること自体がログイン状態の証明
         state.isAuthLoading = false;
         state.isAuthenticated = true; // fetchAuthUserが実行され、返り値がstateに入る
-        console.log(action.payload.username);
         state.user = action.payload.username;
         state.error = undefined;
       })

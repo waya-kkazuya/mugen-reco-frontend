@@ -15,7 +15,6 @@ export const useProcessAuth = () => {
   const checkUsernameAvailability = async (username) => {
     try {
       const response = await checkUserNameMutation.mutateAsync(username);
-      console.log('📡 API呼び出し成功:', response);
       return {
         isAvailable: response.data.is_available,
         message: response.data.message,
@@ -29,15 +28,13 @@ export const useProcessAuth = () => {
     await checkUserNameMutation
       .mutateAsync(formData.username)
       .then((checkUserNameResponse) => {
-        // ユーザー名チェック完了
-        console.log('ユーザー名チェック完了');
+        // console.log('ユーザー名チェック完了');
         if (!checkUserNameResponse.data.is_available) {
           const error = new Error('このユーザー名は既に使用されています');
           error.type = 'USERNAME_UNAVAILABLE';
           throw error;
         }
-        console.log('次の処理へ');
-        // 次の処理（登録）へ
+        // console.log('次の処理（登録）へ');
         return registerMutation.mutateAsync({
           username: formData.username,
           password: formData.password,
@@ -60,7 +57,6 @@ export const useProcessAuth = () => {
       })
       .catch((error) => {
         if (error.response?.data?.detail === 'The CSRF token has expired.' && retryCount === 0) {
-          console.log('CSRF token expired, retrying...');
           return new Promise((resolve) => setTimeout(resolve, 500)).then(() =>
             handleLoginSubmit(formData, retryCount + 1)
           );

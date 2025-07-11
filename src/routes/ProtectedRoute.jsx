@@ -13,8 +13,8 @@ export default function ProtectedRoute({ children }) {
   }
 
   // 現在のlocation情報
-  console.log('location.pathname', location.pathname); // '/profile'
-  console.log('location.search', location.search); // '?tab=liked-posts'
+  // console.log('location.pathname', location.pathname); // '/profile'
+  // console.log('location.search', location.search); // '?tab=liked-posts'
   return auth ? (
     children
   ) : (

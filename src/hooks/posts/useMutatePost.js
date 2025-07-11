@@ -20,7 +20,6 @@ export const useMutatePost = () => {
     },
     onError: (err) => {
       if (err.response.data.detail === 'The CSRF token has expired.') {
-        console.log('Token expired, updating CSRF token...');
         dispatch(toggleCsrfState()); // 失敗した時はCSRFを再取得
       }
 
@@ -50,7 +49,6 @@ export const useMutatePost = () => {
       navigate(`/posts/${variables.id}`, { replace: true });
     },
     onError: (err) => {
-      console.log(err);
       if (err.response?.data?.detail === 'The CSRF token has expired.') {
         dispatch(toggleCsrfState()); // 失敗した時はCSRFを再取得
       }
