@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { CircleUser } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import { isAuthenticated } from '../slices/appSlice';
-import { useProcessAuth } from '../hooks/auth/useProcessAuth';
+import { isAuthenticated } from '../../slices/appSlice';
+import { useProcessAuth } from '../../hooks/auth/useProcessAuth';
 import { useNavigate } from 'react-router-dom';
 
 // 状態を持つ単位にコンポーネントを分割

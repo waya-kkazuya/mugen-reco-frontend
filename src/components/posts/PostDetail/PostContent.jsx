@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Ellipsis, Crown, Medal, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { categoryIconMap, defaultCategoryIcon } from '../../constants/categoryIcons';
-import { useAppSelector } from '../../app/hooks';
-import { currentUser } from '../../slices/appSlice';
-import { useProcessPost } from '../../hooks/posts/useProcessPost';
-import { LikeButton } from '../LikeButton';
-import { useProcessLike } from '../../hooks/like/useProcessLike';
+import { categoryIconMap, defaultCategoryIcon } from '../../../constants/categoryIcons';
+import { useAppSelector } from '../../../app/hooks';
+import { currentUser } from '../../../slices/appSlice';
+import { useProcessPost } from '../../../hooks/posts/useProcessPost';
+import { LikeButton } from '../../common/LikeButton';
+import { useProcessLike } from '../../../hooks/like/useProcessLike';
 
 export default function PostDetail({ post, postId }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

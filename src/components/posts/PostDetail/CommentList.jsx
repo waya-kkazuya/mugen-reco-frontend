@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Ellipsis } from 'lucide-react';
-import { useAppSelector } from '../../app/hooks';
-import { currentUser } from '../../slices/appSlice';
-import { useQueryComments } from '../../hooks/comment/useQueryComments';
-import { useProcessComment } from '../../hooks/comment/useProcessComment';
+import { useAppSelector } from '../../../app/hooks';
+import { currentUser } from '../../../slices/appSlice';
+import { useQueryComments } from '../../../hooks/comment/useQueryComments';
+import { useProcessComment } from '../../../hooks/comment/useProcessComment';
 
 export default function CommentList({ postId }) {
   const [openMenuId, setOpenMenuId] = useState(null);

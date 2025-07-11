@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useProcessComment } from '../../hooks/comment/useProcessComment';
-import { validateCommentForm } from '../../utils/validation';
+import { useProcessComment } from '../../../hooks/comment/useProcessComment';
+import { validateCommentForm } from '../../../utils/validation';
 
 export default function CommentForm({ postId }) {
   const { handleCommentCreateSubmit } = useProcessComment(postId);

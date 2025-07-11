@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Category from '../../components/Category';
-import Posts from '../../components/Posts';
+import Category from '../../components/posts/Home/Category';
+import Posts from '../../components/posts/Home/Posts';
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState(null);

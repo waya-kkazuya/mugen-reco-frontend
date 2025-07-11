@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User, Heart, FileText, ThumbsUp, Loader2 } from 'lucide-react';
-import Card from '../../components/Card';
+import Card from '../../components/common/Card';
 import { useAppSelector } from '../../app/hooks';
 import { currentUser } from '../../slices/appSlice';
 import { useQueryUserPosts } from '../../hooks/user/useQueryUserPosts';
