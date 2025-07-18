@@ -1,7 +1,7 @@
 # 無限レコ フロントエンド
 
 おすすめベスト3投稿を共有するSNSアプリ「無限レコ」のフロントエンドです。  
-React + Vite + Tailwind CSS を用いて構築されており、投稿・コメント・無限スクロール・認証などの機能を備えています。
+React + Vite + Tailwind CSS を用いて構築されています。
 
 ---
 
@@ -79,9 +79,10 @@ React + Vite + Tailwind CSS を用いて構築されており、投稿・コメ�
 | フレームワーク | React / Vite |
 | スタイリング | Tailwind CSS |
 | ルーティング | React Router |
-| 認証・通信 | Cookie, axios??/fetch, CSRF対応 |
-| 状態管理 | Redux / React Query |
-<!-- | バリデーション | Zod | -->
+| HTTP通信 | axios |
+| グローバル状態管理 | Redux Toolkit |
+| サーバー状態管理 | React Query |
+| 認証・セキュリティ | Cookie, CSRF対応 |
 
 ---
 
