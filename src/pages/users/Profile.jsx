@@ -125,11 +125,6 @@ const Profile = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">{username}</h1>
-                <div className="flex items-center mt-2 space-x-4 text-sm text-gray-500">
-                  <span>投稿数: {userPosts.length}</span>
-                  <span>いいね数: {likedPosts.length}</span>
-                  <span>参加日: 2024年1月</span>
-                </div>
               </div>
             </div>
           </div>
