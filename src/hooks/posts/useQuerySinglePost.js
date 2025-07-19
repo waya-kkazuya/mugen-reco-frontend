@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { formatSinglePostData } from '../../utils/formatSinglePostData';
 
 export const useQuerySinglePost = (postId) => {
   const getSinglePost = async () => {
@@ -8,7 +7,7 @@ export const useQuerySinglePost = (postId) => {
     const { data } = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/posts/${postId}`, {
       withCredentials: true,
     });
-    return formatSinglePostData(data);
+    return data;
   };
   return useQuery({
     queryKey: ['single', postId],
