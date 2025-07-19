@@ -107,43 +107,18 @@ export const useMutateLike = (postId, selectedCategory = undefined) => {
               })),
             };
           } else {
-            // リストにない場合は、自分の投稿キャッシュから投稿データを取得して追加
-            const userPostsCache = queryClient.getQueryData(['userPosts', username]);
-            let postToAdd = null;
+            // 新しい投稿にいいねした場合はキャッシュを無効化
+            queryClient.invalidateQueries(['userLikedPosts', username]);
+            // 即座に再フェッチを実行
+            queryClient.refetchQueries(['userLikedPosts', username]);
 
-            // 自分の投稿キャッシュから該当投稿を検索
-            if (userPostsCache) {
-              for (const page of userPostsCache.pages) {
-                const foundPost = page.posts.find((post) => post.post_id === postId);
-                if (foundPost) {
-                  postToAdd = {
-                    ...foundPost,
-                    like_count: res.data.like_count,
-                    is_liked: res.data.is_liked,
-                  };
-                  break;
-                }
-              }
-            }
-
-            // 投稿データが見つかった場合、最初のページの先頭に追加
-            if (postToAdd && oldData.pages.length > 0) {
-              return {
-                ...oldData,
-                pages: [
-                  {
-                    ...oldData.pages[0],
-                    posts: [postToAdd, ...oldData.pages[0].posts],
-                  },
-                  ...oldData.pages.slice(1),
-                ],
-              };
-            }
+            return oldData;
           }
         }
 
         return oldData;
       });
+
       // 4. 詳細画面キャッシュの更新
       const detailQueryKey = ['single', postId];
       queryClient.setQueryData(detailQueryKey, (oldDetailData) => {
