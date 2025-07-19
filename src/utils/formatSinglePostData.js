@@ -1,8 +1,8 @@
-import { formatDate } from './dateUtils';
+import { formatToJST } from './dateUtils';
 
 export const formatSinglePostData = (post) => {
   return {
     ...post,
-    created_at: formatDate(post.created_at),
+    created_at: formatToJST(post.created_at),
   };
 };

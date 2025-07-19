@@ -4,6 +4,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { currentUser } from '../../../slices/appSlice';
 import { useQueryComments } from '../../../hooks/comment/useQueryComments';
 import { useProcessComment } from '../../../hooks/comment/useProcessComment';
+import { formatToJST } from '../../../utils/dateUtils';
 
 export default function CommentList({ postId }) {
   const [openMenuId, setOpenMenuId] = useState(null);
@@ -32,7 +33,9 @@ export default function CommentList({ postId }) {
           <div key={comment.comment_id} className="bg-gray-100 p-3 sm:p-4 rounded relative">
             <p className="text-xs sm:text-sm text-gray-600">@{comment.username}</p>
             <p className="text-sm sm:text-base text-gray-800 mt-1">{comment.content}</p>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">{comment.created_at}</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
+              {formatToJST(comment.created_at)}
+            </p>
 
             {/* 作成者のみ削除可能 */}
             {isCommentOwner && (
