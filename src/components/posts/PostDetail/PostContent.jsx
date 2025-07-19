@@ -7,6 +7,7 @@ import { currentUser } from '../../../slices/appSlice';
 import { useProcessPost } from '../../../hooks/posts/useProcessPost';
 import { LikeButton } from '../../common/LikeButton';
 import { useProcessLike } from '../../../hooks/like/useProcessLike';
+import { formatToJST } from '../../../utils/dateUtils';
 
 export default function PostDetail({ post, postId }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -138,7 +139,7 @@ export default function PostDetail({ post, postId }) {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 text-xs sm:text-sm text-gray-500">
               <span>Posted by @{post.username}</span>
-              <span>{post.created_at}</span>
+              <span>{formatToJST(post.created_at)}</span>
             </div>
             <div className="flex justify-end sm:justify-start">
               <LikeButton

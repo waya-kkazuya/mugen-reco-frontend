@@ -3,6 +3,7 @@ import { categoryIconMap, defaultCategoryIcon } from '../../constants/categoryIc
 import { Crown, Medal, Award } from 'lucide-react';
 import { useProcessLike } from '../../hooks/like/useProcessLike';
 import { LikeButton } from './LikeButton';
+import { formatToJST } from '../../utils/dateUtils';
 
 export default function Card({ post, selectedCategory }) {
   const {
@@ -76,7 +77,7 @@ export default function Card({ post, selectedCategory }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <span className="text-sm text-gray-500">Posted by @{username}</span>
-            <span className="text-sm text-gray-500">{created_at}</span>
+            <span className="text-sm text-gray-500">{formatToJST(created_at)}</span>
           </div>
           <LikeButton
             handleLikeToggle={handleLikeToggle}

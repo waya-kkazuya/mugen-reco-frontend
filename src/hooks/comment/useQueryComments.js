@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { formatCommentData } from '../../utils/formatCommentData';
 
 // 投稿一覧の閲覧にはJWT認証（withCredentials）は不要
 export const useQueryComments = (postId) => {
@@ -8,7 +7,7 @@ export const useQueryComments = (postId) => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_REACT_APP_API_URL}/posts/${postId}/comments`
     );
-    return formatCommentData(data);
+    return data;
   };
   // キャッシュに保存する設定、エラーも返り値に存在
   return useQuery({

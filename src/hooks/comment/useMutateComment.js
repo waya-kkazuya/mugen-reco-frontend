@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useAppDispatch } from '../../app/hooks';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toggleCsrfState } from '../../slices/appSlice';
-import { formatSingleCommentData } from '../../utils/formatSingleCommentData';
 
 export const useMutateComment = (postId) => {
   const dispatch = useAppDispatch();
@@ -16,7 +15,7 @@ export const useMutateComment = (postId) => {
           withCredentials: true,
         }
       );
-      return formatSingleCommentData(response);
+      return response;
     },
     onSuccess: (res) => {
       const previousComments = queryClient.getQueryData(['comments', postId]);
