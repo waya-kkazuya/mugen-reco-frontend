@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CircleUser } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { isAuthenticated } from '../../slices/appSlice';
@@ -8,22 +8,56 @@ import { useNavigate } from 'react-router-dom';
 // 状態を持つ単位にコンポーネントを分割
 export default function AccountMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const timeoutRef = useRef(null);
   const auth = useSelector(isAuthenticated);
   const navigate = useNavigate();
   const { logout } = useProcessAuth();
+
+  // マウスホバーの遅延処理
+  const handleMouseEnter = () => {
+    if (window.innerWidth >= 768) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current); // 既存のタイムアウトをキャンセル
+      }
+      setIsHovering(true);
+      setIsMenuOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth >= 768) {
+      setIsHovering(false);
+      // 150ms後にメニューを閉じる（遅延処理）
+      timeoutRef.current = setTimeout(() => {
+        setIsMenuOpen(false);
+      }, 150);
+    }
+  };
+
+  // クリーンアップ関数
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     // 778pxタブレット以上はマウスホバーを有効にする
-    <div
-      className="relative"
-      onMouseEnter={() => window.innerWidth >= 768 && setIsMenuOpen(true)}
-      onMouseLeave={() => window.innerWidth >= 768 && setIsMenuOpen(false)}
-    >
+    <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {/* スマホ・タブレット用にボタンクリック */}
       <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <CircleUser className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-blue-600 hover:text-blue-700 transition" />
       </button>
+
       {isMenuOpen && (
-        <div className="absolute right-0 mt-1 sm:mt-0 bg-white border border-gray-200 rounded shadow-md w-36 sm:w-40 md:w-44 z-50 text-sm sm:text-base">
+        <div
+          className="absolute right-0 mt-1 sm:mt-0 bg-white border border-gray-200 rounded shadow-md w-36 sm:w-40 md:w-44 z-50 text-sm sm:text-base"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           {auth ? (
             <>
               <button
