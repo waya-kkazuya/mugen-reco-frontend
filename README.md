@@ -108,6 +108,8 @@ src/
 - テストコードの追加
 - ReactのコードのTypeScriptへの移行
 
+---
+
 ## 6. ローカル開発環境のセットアップ手順
 
 ### リポジトリをクローン
@@ -136,6 +138,14 @@ cp .env.example .env.local
 ```bash
 npm run dev
 ```
+
+---
+
+## 関連リポジトリへのリンク
+- [無限レコ 統合ランディングページ](https://github.com/waya-kkazuya/mugen-reco-portfolio)
+- [無限レコ バックエンド](https://github.com/waya-kkazuya/mugen-reco-backend)
+
+---
 
 ## 開発者
 - waya
